@@ -1,0 +1,9 @@
+DELIMITER $$
+
+CREATE TRIGGER after_insert_process AFTER INSERT INTO table_process
+FOR EACH ROW
+BEGIN
+	DECLARE id_tipo BIGINT;
+
+	slee
+END$$

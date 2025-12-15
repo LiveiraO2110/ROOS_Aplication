@@ -1,0 +1,17 @@
+CREATE OR REPLACE PROCEDURE sp_insert_process_ready(SP_id_process BIGINT)
+LANGUAGE plpgsql
+AS $$
+DECLARE
+	v_name VARCHAR;
+	v_cliente VARCHAR;
+	v_anm INTEGER;
+BEGIN
+	SELECT name, cliente, anm INTO v_name, v_cliente, v_anm FROM table_process WHERE id = SP_id_process;
+
+	INSERT INTO table_process_ready (id_process, name, cliente, anm) VALUES (SP_id_process, v_name, v_cliente, v_anm);
+
+	DELETE FROM table_process WHERE id = SP_id_process;
+END;
+$$;
+
+call sp_insert_process_ready(9);

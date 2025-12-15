@@ -1,0 +1,27 @@
+CREATE OR REPLACE FUNCTION trg_after_dele_process()
+RETURNS trigger AS $$
+BEGIN
+    INSERT INTO table_sub_process (
+        id_process,
+        descricao,
+        limite,
+        obs,
+        status
+    )
+    SELECT
+        NEW.id,
+        t.descricao,
+        t.limite,
+        'Nenhuma Observação',
+        FALSE
+    FROM table_sub_process_type t
+    WHERE t.id_tipo = NEW.id_tipo;
+
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER after_insert_process
+AFTER INSERT ON table_process
+FOR EACH ROW
+EXECUTE FUNCTION trg_after_insert_process();

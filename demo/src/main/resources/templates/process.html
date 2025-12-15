@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Processos</title>
+</head>
+<body>
+    <h1>Processos</h1>
+
+    <table border="1" cellpadding="8">
+        <tr>
+            <th>ID</th>
+            <th>Descrição</th>
+            <th>Status</th>
+        </tr>
+
+        <tr th:each="p : ${list}">
+            <td th:text="${p.ID}" ></td>
+            <td th:text="${p.name}"></td>
+            <td th:text="${p.status}"></td>
+        </tr>
+    </table>
+
+</body>
+</html>

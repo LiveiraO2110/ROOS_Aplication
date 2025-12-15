@@ -1,0 +1,15 @@
+CREATE OR REPLACE FUNCTION trg_after_update_sub_process()
+RETURNS trigger AS $$
+BEGIN 
+	IF (SELECT COUNT(*) FROM table_sub_process WHERE id_process = new.id_process AND status = False) = 0 THEN
+		UPDATE table_process SET status = True WHERE id = new.id_process;
+	END IF;
+
+	RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER after_update_sub_process
+AFTER UPDATE ON table_sub_process
+FOR EACH ROW
+EXECUTE FUNCTION trg_after_update_sub_process();

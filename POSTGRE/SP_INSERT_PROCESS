@@ -1,0 +1,17 @@
+CREATE OR REPLACE PROCEDURE sp_insert_process(SP_id_tipo INT)
+LANGUAGE plpgsql
+AS $$
+DECLARE
+	v_name VARCHAR; 
+BEGIN
+	SELECT name INTO v_name FROM table_type WHERE id = SP_id_tipo;
+
+	INSERT INTO table_process (id_tipo, name, status) VALUES (SP_id_tipo, v_name, False);
+END;
+$$;
+
+call sp_insert_process (4);
+
+SELECT * FROM table_process;
+
+SELECT * FROM table_sub_process;

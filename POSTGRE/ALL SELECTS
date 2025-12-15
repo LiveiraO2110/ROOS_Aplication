@@ -1,0 +1,13 @@
+SELECT * FROM table_process;
+
+SELECT * FROM table_type;
+
+SELECT * FROM table_sub_process;
+
+SELECT * FROM table_sub_process_type;
+
+SELECT * FROM table_users;
+
+SELECT * FROM table_user_process;
+
+SELECT * FROM table_process_ready;

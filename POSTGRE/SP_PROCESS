@@ -1,0 +1,29 @@
+CREATE OR REPLACE PROCEDURE sp_process(SP_id INT)
+LANGUAGE plpgsql
+AS $$
+DECLARE
+    v_status BOOLEAN;
+    v_count INT;
+BEGIN
+    SELECT COUNT(*) INTO v_count
+    FROM table_process
+    WHERE id = SP_id;
+
+    IF v_count = 0 THEN
+        RAISE NOTICE 'PROCESSO NÃO ESTÁ EM ABERTO';
+        RETURN;
+    END IF;
+
+    SELECT status INTO v_status
+    FROM table_process
+    WHERE id = SP_id;
+
+    IF v_status = TRUE THEN
+        RAISE NOTICE 'PROCESSO JÁ ACABOU';
+    ELSE
+        RAISE NOTICE 'PROCESSO NÃO ACABOU';
+    END IF;
+END;
+$$;
+
+call sp_process(9);

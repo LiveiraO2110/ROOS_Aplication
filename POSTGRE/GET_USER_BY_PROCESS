@@ -1,0 +1,22 @@
+DROP FUNCTION get_user_by_process;
+
+CREATE FUNCTION get_user_by_process (FN_id_process BIGINT)
+RETURNS TABLE(
+	user_id BIGINT,
+	user_name VARCHAR
+)
+LANGUAGE plpgsql
+AS $BODY$
+BEGIN
+	RETURN QUERY
+	SELECT tu.id AS user_id, tu.name AS user_name
+	FROM table_user_process tup
+	JOIN table_users tu 
+	ON tup.id_user = tu.id
+	JOIN table_process tp
+	ON tp.id = tup.id_process
+	WHERE tp.id = FN_id_process;
+END;
+$BODY$;
+
+SELECT * FROM get_user_by_process(1);
