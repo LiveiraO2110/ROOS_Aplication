@@ -1,5 +1,7 @@
 package com.example.demo.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.SubProcessType;
@@ -27,5 +29,9 @@ public class ServicesTypeSub {
         type.setLimit(limit);
 
         return repo.save(type);
+    }
+
+    public List<SubProcessType> getAll() {
+        return repo.findAll();
     }
 }

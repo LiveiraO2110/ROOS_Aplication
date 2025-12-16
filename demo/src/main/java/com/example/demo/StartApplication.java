@@ -1,28 +1,32 @@
 package com.example.demo;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import com.example.demo.service.ServicesProcess;
+import com.example.demo.service.ServicesProcessReady;
 import com.example.demo.service.ServicesType;
+import com.example.demo.service.ServicesTypeSub;
+import com.example.demo.service.ServicesUserProcess;
 import com.example.demo.service.ServicesUsers;
 
 @Component
 public class StartApplication implements CommandLineRunner{
+    @Autowired
     private ServicesUsers user;
+    @Autowired
     private ServicesProcess process;
+    @Autowired
     private ServicesType type;
-    
-    public StartApplication (ServicesType type, ServicesUsers user){
-        this.type = type;
-        this.user = user;
-    }
+    @Autowired
+    private ServicesProcessReady ready;
+    @Autowired
+    private ServicesTypeSub type_sub;
+    @Autowired
+    private ServicesUserProcess user_process;
 
     @Override
     public void run(String... args) throws Exception {
-        //type.createType("Concessão");
-        user.getAll();
-
-        //TypeProcess 
     }
 }

@@ -1,5 +1,7 @@
 package com.example.demo.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.TypeProcess;
@@ -17,5 +19,9 @@ public class ServicesType {
         TypeProcess type = new TypeProcess(name);
         
         return repo.save(type);
+    }
+
+    public List<TypeProcess> getAll() {
+        return repo.findAll();
     }
 }

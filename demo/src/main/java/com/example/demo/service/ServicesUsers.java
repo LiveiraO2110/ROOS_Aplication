@@ -26,4 +26,14 @@ public class ServicesUsers {
     public void delete (Long ID){
         repo.deleteById(ID);
     }
+
+    public User createUser(String name, String email, String password){
+        User user = new User();
+
+        user.setEmail(email);
+        user.setName(name);
+        user.setPassword(password);
+
+        return repo.save(user);
+    }
 }

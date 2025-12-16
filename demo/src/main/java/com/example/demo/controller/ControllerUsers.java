@@ -1,12 +1,15 @@
 package com.example.demo.controller;
 
-import org.springframework.stereotype.Controller;
+import java.util.List;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.model.User;
 import com.example.demo.service.ServicesUsers;
 
-@Controller
+@RestController
 @RequestMapping("/user")
 public class ControllerUsers {
     private final ServicesUsers user;
@@ -16,8 +19,7 @@ public class ControllerUsers {
     }
 
     @GetMapping
-    public String list (org.springframework.ui.Model model){
-        model.addAttribute("list", user.getAll());
-        return "user";
+    public List<User> getAll(){
+        return user.getAll();
     }
 }

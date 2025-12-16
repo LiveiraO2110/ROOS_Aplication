@@ -6,20 +6,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.model.ProcessAction;
-import com.example.demo.service.ServicesProcess;
+import com.example.demo.model.TypeProcess;
+import com.example.demo.service.ServicesType;
 
 @RestController
-@RequestMapping("/process")
-public class ControllerProcess {
-    private final ServicesProcess service;
+@RequestMapping("/type")
+public class ControllerType {
+    private final ServicesType service;
 
-    public ControllerProcess(ServicesProcess service) {
+    public ControllerType(ServicesType service){
         this.service = service;
     }
 
     @GetMapping
-    public List<ProcessAction> getAll(){
+    public List<TypeProcess> getAll(){
         return service.getAll();
     }
 }

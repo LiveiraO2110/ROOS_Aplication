@@ -2,6 +2,8 @@ package com.example.demo.model;
 
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -25,6 +27,7 @@ public class SubProcessAction {
 
     @ManyToOne
     @JoinColumn(name = "id_process")
+    @JsonBackReference("process-sub")
     private ProcessAction process;
 
 

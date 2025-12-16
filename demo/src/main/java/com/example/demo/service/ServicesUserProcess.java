@@ -2,11 +2,12 @@ package com.example.demo.service;
 
 import org.springframework.stereotype.Service;
 
+import com.example.demo.model.ProcessAction;
+import com.example.demo.model.User;
 import com.example.demo.model.UserProcess;
 import com.example.demo.repository.ProcessRepo;
 import com.example.demo.repository.UserProcessRepo;
 import com.example.demo.repository.UsersRepository;
-import com.example.demo.model.User;
 
 @Service
 public class ServicesUserProcess {
@@ -24,6 +25,11 @@ public class ServicesUserProcess {
         ProcessAction process = p_repo.findById(id_process).orElseThrow(() -> new RuntimeException("Processo não encontrado"));
         User user = u_repo.findById(id_user).orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
         
-        return repo.save(user);
+        UserProcess userProcess = new UserProcess();
+
+        userProcess.setProcess(process);
+        userProcess.setUser(user);
+
+        return repo.save(userProcess);
     }
 }
