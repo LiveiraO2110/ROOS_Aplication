@@ -1,8 +1,5 @@
 package com.example.demo.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,13 +16,10 @@ public class UserProcess {
     private Long ID;
 
     @ManyToOne
-    @JsonBackReference("user")
     @JoinColumn(name="id_user")
     private User user;
 
     @ManyToOne
-    //@JsonBackReference("process-user")
-    @JsonIgnore
     @JoinColumn(name="id_process")
     private ProcessAction process;
 

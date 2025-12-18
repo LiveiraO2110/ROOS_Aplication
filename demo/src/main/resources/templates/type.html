@@ -2,7 +2,7 @@
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Processos</title>
+    <title>Tipos de Processos</title>
 
     <style>
         body {
@@ -65,14 +65,14 @@
 
 <body>
 
-    <h2>Processos</h2>
+    <h2>Tipos de Processos</h2>
 
     <div class="container">
-        <div class="card" th:each="p : ${processos}">
-            <div class="card-title" th:text="${p.name} + ' de ' + ${p.cliente}"></div>
+        <div class="card" th:each="t : ${tipos}">
+            <div class="card-title" th:text="${t.name}"></div>
 
             <a class="btn"
-               th:href="@{/process/sub-process/{id}(id=${p.ID})}">
+               th:href="@{/type/sub-type/{id}(id=${t.ID})}">
                 Ver mais detalhes
             </a>
         </div>

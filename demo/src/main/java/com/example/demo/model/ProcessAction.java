@@ -3,8 +3,6 @@ package com.example.demo.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -29,18 +27,12 @@ public class ProcessAction {
 
     @ManyToOne
     @JoinColumn(name = "id_tipo")
-    //@JsonBackReference("type-process")
-    @JsonIgnore
     private TypeProcess typeProcess;
 
     @OneToMany(mappedBy = "process")
-    //@JsonManagedReference("process-sub")
-    @JsonIgnore
     private List<SubProcessAction> subprocesses = new ArrayList<>();
 
     @OneToMany(mappedBy = "process")
-    //@JsonManagedReference("process-user")
-    @JsonIgnore
     private List<UserProcess> userProcesses = new ArrayList<>();
 
 
@@ -61,11 +53,11 @@ public class ProcessAction {
     public void setCliente(String cliente) {
         this.cliente = cliente;
     }
-    public Integer getANM() {
+    public Integer getAnm() {
         return anm;
     }
 
-    public void setANM(Integer anm) {
+    public void setAnm(Integer anm) {
         this.anm = anm;
     }
     public String getName() {

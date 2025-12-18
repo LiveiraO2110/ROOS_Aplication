@@ -2,14 +2,15 @@ package com.example.demo.controller;
 
 import java.util.List;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.model.TypeProcess;
 import com.example.demo.service.ServicesType;
 
-@RestController
+@Controller
 @RequestMapping("/type")
 public class ControllerType {
     private final ServicesType service;
@@ -19,7 +20,11 @@ public class ControllerType {
     }
 
     @GetMapping
-    public List<TypeProcess> getAll(){
-        return service.getAll();
+    public String getAll(Model model){
+        List<TypeProcess> lista = service.getAll();
+
+        model.addAttribute("tipos", lista);
+
+        return "type";
     }
 }

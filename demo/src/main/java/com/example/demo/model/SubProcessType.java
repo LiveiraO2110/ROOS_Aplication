@@ -1,7 +1,5 @@
 package com.example.demo.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -21,7 +19,6 @@ public class SubProcessType {
 
     @ManyToOne
     @JoinColumn(name = "id_type")
-    @JsonIgnore
     private TypeProcess typeProcess;
 
     public SubProcessType(TypeProcess type, String desc, Integer limite) {
@@ -57,7 +54,7 @@ public class SubProcessType {
     public void setDesc(String desc) {
         this.descricao = desc;
     }
-    public Integer getLimit() {
+    public Integer getLimite() {
         return limite;
     }
     public void setLimit(Integer limit) {

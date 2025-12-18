@@ -3,8 +3,6 @@ package com.example.demo.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -22,13 +20,9 @@ public class TypeProcess {
     private String name;
 
     @OneToMany(mappedBy = "typeProcess")
-    //@JsonManagedReference("type-subtype")
-    @JsonIgnore
     private List<SubProcessType> subProcessType = new ArrayList<>();
 
     @OneToMany(mappedBy = "typeProcess", fetch = FetchType.LAZY)
-    //@JsonManagedReference("type-process")
-    @JsonIgnore
     private List<ProcessAction> processAction = new ArrayList<>();
 
     public TypeProcess(String name) {

@@ -21,7 +21,7 @@ public class ServicesProcessReady {
         ReadyProcess readyProcess = new ReadyProcess();
 
         readyProcess.setId_process(id_process);
-        readyProcess.setANM(process.getANM());
+        readyProcess.setANM(process.getAnm());
         readyProcess.setCliente(process.getCliente());
         readyProcess.setName(process.getName());
 

@@ -2,7 +2,7 @@
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Lista de Usuários</title>
+    <title>Tipos de Sub Processos</title>
 
     <style>
         body {
@@ -12,7 +12,7 @@
             background-color: #f4f6f9;
         }
 
-        h1 {
+        h2 {
             text-align: center;
             margin-bottom: 25px;
             color: #333;
@@ -33,7 +33,7 @@
         }
 
         thead {
-            background: linear-gradient(135deg, #28a745, #1e7e34);
+            background: linear-gradient(135deg, #6f42c1, #59339d);
             color: #ffffff;
         }
 
@@ -69,23 +69,23 @@
 
 <body>
 
-    <h1>Usuários</h1>
+    <h2>Tipos de Sub Processos</h2>
 
     <div class="table-container">
         <table>
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Nome</th>
-                    <th>Email</th>
+                    <th>Descrição</th>
+                    <th>Limite</th>
                 </tr>
             </thead>
 
             <tbody>
-                <tr th:each="p : ${users}">
-                    <td th:text="${p.ID}"></td>
-                    <td th:text="${p.name}"></td>
-                    <td th:text="${p.email}"></td>
+                <tr th:each="s : ${subTipos}">
+                    <td th:text="${s.ID}"></td>
+                    <td th:text="${s.desc}"></td>
+                    <td th:text="${s.limite}"></td>
                 </tr>
             </tbody>
         </table>

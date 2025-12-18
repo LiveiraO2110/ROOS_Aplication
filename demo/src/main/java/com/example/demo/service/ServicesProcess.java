@@ -35,7 +35,7 @@ public class ServicesProcess {
         
         User user = user_repo.findById(userId).orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
 
-        process.setANM(anm);
+        process.setAnm(anm);
         process.setCliente(cliente);
         process.setName(type.getName());
         process.setStatus(false);   

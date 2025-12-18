@@ -34,4 +34,8 @@ public class ServicesTypeSub {
     public List<SubProcessType> getAll() {
         return repo.findAll();
     }
+
+    public List<SubProcessType> getById_type(Long id){
+        return repo.findByTypeProcess_ID(id);
+    }
 }
