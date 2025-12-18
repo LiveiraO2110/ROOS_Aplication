@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.example.demo.model.ProcessAction;
 import com.example.demo.model.User;
 import com.example.demo.repository.UsersRepository;
 
@@ -35,5 +36,19 @@ public class ServicesUsers {
         user.setPassword(password);
 
         return repo.save(user);
+    }
+
+    public List<ProcessAction> getProcessByUser(Long id){
+        return repo.findProcessByUser(id);
+    }
+
+    public User getUserById(Long id){
+        User user = repo.findById(id).orElseThrow(() -> new RuntimeException("User não encontrado"));
+
+        return user;
+    }
+    
+    public List<User> getUserByProcess(Long id){
+        return repo.findUserByProcess(id);
     }
 }

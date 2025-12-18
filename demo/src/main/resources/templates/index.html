@@ -2,31 +2,33 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Página Inicial</title>
+    <title>Sistema - Interface Prazos</title>
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
 
     <div class="container">
-        <h1>Sistema - Interface Prazos</h1>
+        <h1>Sistema de Gestão de Prazos</h1>
+        <p class="subtitle">Escolha uma opção para continuar</p>
 
-        <button onclick="window.location.href='/login'">
-            Login
-        </button>
+        <div class="buttons">
+            <button onclick="window.location.href='/login'">
+                🔐 Login
+            </button>
 
-        <button onclick="window.location.href='/user'">
-            Acessar Usuários
-        </button>
+            <button onclick="window.location.href='/user'">
+                👤 Usuários
+            </button>
 
-        <button onclick="window.location.href='/process'">
-            Acessar Processos
-        </button>
+            <button onclick="window.location.href='/process'">
+                📄 Processos
+            </button>
 
-        <button onclick="window.location.href='/type'">
-            Acessar Tipos de Process
-        </button>
+            <button onclick="window.location.href='/type'">
+                🗂 Tipos de Processos
+            </button>
+        </div>
     </div>
 
-    <script src="/js/script.js"></script>
 </body>
 </html>

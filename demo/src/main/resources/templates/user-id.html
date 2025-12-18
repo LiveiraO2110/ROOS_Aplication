@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Perfil do Usuário</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f4f6f9;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .profile-card {
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            padding: 30px;
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+        }
+
+        .avatar {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #007bff, #00c6ff);
+            color: #fff;
+            font-size: 32px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .profile-header h2 {
+            margin: 0;
+        }
+
+        .profile-header p {
+            margin: 5px 0 0;
+            color: #666;
+        }
+
+        .profile-body {
+            margin-top: 25px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .info-item {
+            background: #f8f9fc;
+            padding: 15px;
+            border-radius: 12px;
+        }
+
+        .info-item span {
+            display: block;
+            font-size: 13px;
+            color: #888;
+        }
+
+        .info-item strong {
+            font-size: 16px;
+        }
+
+        .actions {
+            margin-top: 30px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 18px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: #007bff;
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background: #0056b3;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: #fff;
+        }
+
+        .btn-secondary:hover {
+            background: #565e64;
+        }
+
+        .btn-danger {
+            background: #dc3545;
+            color: #fff;
+        }
+
+        .btn-danger:hover {
+            background: #b02a37;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            margin-bottom: 10px;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #222;
+        }
+
+        .btn_process{
+            display: inline-block;
+            padding: 10px 16px;
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: background 0.3s ease;
+        }
+
+        .btn:hover {
+            background: linear-gradient(135deg, #0056b3, #003f88);
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <div class="profile-card">
+
+        <!-- Cabeçalho -->
+        <div class="profile-header">
+            <div class="avatar"
+                 th:text="${#strings.substring(user.name,0,1)}">
+                U
+            </div>
+
+            <div>
+                <h2 th:text="${user.name}">Nome do Usuário</h2>
+                <p th:text="${user.email}">email@exemplo.com</p>
+            </div>
+        </div>
+
+        <!-- Corpo -->
+        <div class="profile-body">
+            <div class="info-grid">
+                <div class="info-item">
+                    <span>ID do Usuário</span>
+                    <strong th:text="${user.ID}">1</strong>
+                </div>
+
+                <div class="info-item">
+                    <span>Email</span>
+                    <strong th:text="${user.email}">email@exemplo.com</strong>
+                </div>
+
+                <div class="info-item">
+                    <span>Total de Processos</span>
+                    <strong th:text="${user.userProcess.size()}">0</strong>
+                </div>
+            </div>
+
+            <div class="actions">
+                <button type="button"
+                    class="btn btn-danger"
+                    onclick="history.back()">
+                    Voltar
+                </button>
+            </div>
+
+        </div>
+
+        <div>
+            <h2>Processos</h2>
+
+            <div class="container">
+                <div class="card" th:each="p : ${listaProcessos}">
+                    <div class="card-title" th:text="${p.name} + ' de ' + ${p.cliente}"></div>
+                    <a class="btn_process"
+                        th:href="@{/process/sub-process/{id}(id=${p.ID})}">
+                        Ver mais detalhes
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>

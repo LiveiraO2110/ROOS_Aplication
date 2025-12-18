@@ -14,9 +14,9 @@ import com.example.demo.service.ServicesUsers;
 @Component
 public class StartApplication implements CommandLineRunner{
     @Autowired
-    private ServicesUsers user;
+    private ServicesUsers service_user;
     @Autowired
-    private ServicesProcess process;
+    private ServicesProcess service_process;
     @Autowired
     private ServicesType type;
     @Autowired
