@@ -164,6 +164,20 @@
         .btn:hover {
             background: linear-gradient(135deg, #0056b3, #003f88);
         }
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .prazo {
+            font-size: 13px;
+            color: #666;
+            background: #f1f3f5;
+            padding: 4px 10px;
+            border-radius: 12px;
+        }
+
     </style>
 </head>
 
@@ -172,7 +186,6 @@
 <div class="container">
     <div class="profile-card">
 
-        <!-- Cabeçalho -->
         <div class="profile-header">
             <div class="avatar"
                  th:text="${#strings.substring(user.name,0,1)}">
@@ -185,7 +198,6 @@
             </div>
         </div>
 
-        <!-- Corpo -->
         <div class="profile-body">
             <div class="info-grid">
                 <div class="info-item">
@@ -217,15 +229,22 @@
         <div>
             <h2>Processos</h2>
 
-            <div class="container">
-                <div class="card" th:each="p : ${listaProcessos}">
-                    <div class="card-title" th:text="${p.name} + ' de ' + ${p.cliente}"></div>
-                    <a class="btn_process"
-                        th:href="@{/process/sub-process/{id}(id=${p.ID})}">
-                        Ver mais detalhes
-                    </a>
+            <div class="card" th:each="p : ${listaProcessos}">
+                <div class="card-header">
+                    <div class="card-title"
+                        th:text="${p.name + ' de ' + p.cliente}">
+                    </div>
+                    <strong class="prazo"
+                            th:text="${p.prazo != null ? p.prazo : 'Não Definido'}">
+                    </strong>
                 </div>
+                <a class="btn_process"
+                th:href="@{/process/sub-process/{id}(id=${p.ID})}">
+                    Ver mais detalhes
+                </a>
             </div>
+
+
         </div>
 
     </div>

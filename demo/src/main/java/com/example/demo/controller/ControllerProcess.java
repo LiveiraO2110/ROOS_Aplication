@@ -9,14 +9,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.demo.model.ProcessAction;
 import com.example.demo.service.ServicesProcess;
+import com.example.demo.service.ServicesUserProcess;
 
 @Controller
 @RequestMapping("/process")
 public class ControllerProcess {
     private final ServicesProcess service;
+    private final ServicesUserProcess service_user_process;
 
-    public ControllerProcess(ServicesProcess service) {
+    public ControllerProcess(ServicesProcess service, ServicesUserProcess service_user_process) {
         this.service = service;
+        this.service_user_process = service_user_process;
     }
 
     @GetMapping

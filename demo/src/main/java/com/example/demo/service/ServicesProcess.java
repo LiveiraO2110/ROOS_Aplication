@@ -1,55 +1,57 @@
 package com.example.demo.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.ProcessAction;
+import com.example.demo.model.SubProcessType;
 import com.example.demo.model.TypeProcess;
-import com.example.demo.model.User;
-import com.example.demo.model.UserProcess;
 import com.example.demo.repository.ProcessRepo;
+import com.example.demo.repository.SubProcessTypeRepo;
 import com.example.demo.repository.TypeRepo;
-import com.example.demo.repository.UserProcessRepo;
-import com.example.demo.repository.UsersRepository;
+
+import jakarta.transaction.Transactional;
 
 @Service
 public class ServicesProcess {
 
     private final ProcessRepo repo;
     private final TypeRepo type_repo;
-    private final UsersRepository user_repo;
-    private final UserProcessRepo user_process_repo;
+    private final SubProcessTypeRepo sub_type_repo;
+    private final ServicesSubProcess service_sub;
 
-    public ServicesProcess(ProcessRepo repo, TypeRepo type, UsersRepository user, UserProcessRepo user_process_repo) {
+    public ServicesProcess(ProcessRepo repo, TypeRepo type, SubProcessTypeRepo sub_type_repo, ServicesSubProcess service_sub) {
         this.repo = repo;
         this.type_repo = type;
-        this.user_repo = user;
-        this.user_process_repo = user_process_repo;
+        this.sub_type_repo = sub_type_repo;
+        this.service_sub = service_sub;
     }
 
-    public ProcessAction createProcess(Long typeId, Integer anm, String cliente, Long userId) {
+    @Transactional
+    public ProcessAction createProcess(Long typeId, Integer anm, String cliente, Long userId, LocalDate prazo) {
         ProcessAction process = new ProcessAction();
 
         TypeProcess type = type_repo.findById(typeId).orElseThrow(() -> new RuntimeException("Tpo não encontrado"));
-        
-        User user = user_repo.findById(userId).orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+        List<SubProcessType> subType = sub_type_repo.findByTypeProcess_ID(typeId);
 
         process.setAnm(anm);
         process.setCliente(cliente);
         process.setName(type.getName());
         process.setStatus(false);   
         process.setTypeProcess(type);
+        process.setPrazo(prazo);
+    
+        process = repo.save(process);
 
-        UserProcess up = new UserProcess();
-        up.setUser(user);
-        up.setProcess(process);
-        
-        user_process_repo.save(up);
+        System.out.println(subType.size());
 
-        process.getUserProcesses().add(up);
+        for (SubProcessType sub : subType) {
+            service_sub.createSubProcess(process, sub.getDesc(), sub.getLimite(), prazo);
+        }
 
-        return repo.save(process);
+        return process;
     }
 
     public List<ProcessAction> getAll(){

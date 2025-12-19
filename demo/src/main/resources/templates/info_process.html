@@ -97,7 +97,10 @@
             background: #dc3545;
             color: #fff;
         }
-
+        .btn-safe{
+            background: #43dc35;
+            color: #fff;
+        }
         .btn-danger:hover {
             background: #b02a37;
         }
@@ -181,6 +184,11 @@
             class="btn btn-danger"
             onclick="history.back()">
             Voltar
+            </button>
+            <button type="button"
+            class="btn btn-safe"
+            onclick="window.location.href='process/add_user_process/{{processId}}'">
+            Adicionar Usuários
             </button>
         </div>
 

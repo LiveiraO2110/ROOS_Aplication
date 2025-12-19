@@ -12,7 +12,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table (name="table_sub_process")
-public class SubProcessAction {
+public class SubProcessAction implements Comparable<SubProcessAction> {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long ID;
@@ -84,5 +84,15 @@ public class SubProcessAction {
 
     public void setObs(String obs) {
         this.obs = obs;
+    }
+
+    @Override
+    public int compareTo(SubProcessAction that) {
+        if (this.getLimite() >= that.getLimite()) {
+            return 1;
+        }
+        else{
+            return -1;
+        }
     }
 }

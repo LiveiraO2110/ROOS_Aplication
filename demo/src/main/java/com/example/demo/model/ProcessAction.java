@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +15,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "table_process")
-public class ProcessAction {
+public class ProcessAction implements Comparable<ProcessAction> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,6 +25,7 @@ public class ProcessAction {
     private String name;
     private Integer anm;
     private String cliente;
+    private LocalDate prazo;
 
     @ManyToOne
     @JoinColumn(name = "id_tipo")
@@ -37,16 +39,23 @@ public class ProcessAction {
 
 
     public ProcessAction(TypeProcess typeProcess, Boolean status, String name,
-                         Integer anm, String cliente) {
+                         Integer anm, String cliente, LocalDate prazo) {
         this.typeProcess = typeProcess;
         this.status = status;
         this.name = name;
         this.anm = anm;
         this.cliente = cliente;
+        this.prazo = prazo;
     }
 
     public ProcessAction(){}
+    public LocalDate getPrazo() {
+        return prazo;
+    }
 
+    public void setPrazo(LocalDate prazo) {
+        this.prazo = prazo;
+    }
     public String getCliente() {
         return cliente;
     }
@@ -99,5 +108,16 @@ public class ProcessAction {
 
     public void setTypeProcess(TypeProcess typeProcess) {
         this.typeProcess = typeProcess;
+    }
+
+    @Override
+    public int compareTo(ProcessAction that) {
+        if (this.prazo.isBefore(that.prazo)) {
+            return -1;
+        } else if (this.prazo.isAfter(that.prazo)) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 }
