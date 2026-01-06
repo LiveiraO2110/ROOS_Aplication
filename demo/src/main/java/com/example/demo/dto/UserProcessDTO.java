@@ -1,10 +1,17 @@
 package com.example.demo.dto;
-
-import com.example.demo.model.ProcessAction;
-import com.example.demo.model.User;
+import com.example.demo.model.UserProcess;
 
 public record UserProcessDTO(
-    ProcessAction process,
-    User user
+    Long id,
+    Long processId,
+    Long user
 ) 
-{}
+{
+    public UserProcessDTO(UserProcess userProcess){
+        this(
+            userProcess.getID(),
+            userProcess.getProcess().getID(),
+            userProcess.getUser().getID()
+        );
+    }
+}

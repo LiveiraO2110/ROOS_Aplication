@@ -2,17 +2,15 @@ package com.example.demo.controller;
 
 import java.util.List;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.model.ProcessAction;
-import com.example.demo.model.User;
+import com.example.demo.dto.UserDTO;
 import com.example.demo.service.ServicesUsers;
 
-@Controller
+@RestController
 @RequestMapping("/user")
 public class ControllerUsers {
     private final ServicesUsers service;
@@ -22,24 +20,14 @@ public class ControllerUsers {
     }
 
     @GetMapping
-    public String getAll(Model model){
-        List<User> lista =  service.getAll();
+    public List<UserDTO> getAll(){
+        List<UserDTO> lista = service.getAll().stream().map(UserDTO::new).toList();
 
-        model.addAttribute("users", lista);
-
-        return "user";
+        return lista;
     }
 
     @GetMapping("{id}")
-    public String profile(@PathVariable("id") Long id, Model model){
-        User user = service.getUserById(id);
-
-        List<ProcessAction> lista = service.getProcessByUser(id);
-
-        model.addAttribute("user", user);
-
-        model.addAttribute("listaProcessos", lista);
-
-        return "user-id";
-    }  
+    public UserDTO profile(@PathVariable("id") Long id){
+        return new UserDTO(service.getUserById(id));
+    }
 }
